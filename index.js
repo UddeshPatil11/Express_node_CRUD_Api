@@ -234,6 +234,11 @@ const fill = (start, end, step, options = {}) => {
   if (opts.capture === true) opts.wrap = true;
   step = step || opts.step || 1;
 
+  if (isNumber(step)) {
+    if (step = null && isObject(step)) return  invalidStep(step, options);
+    return fillNumbers(start, end, step, opts); 
+
+
   if (!isNumber(step)) {
     if (step != null && !isObject(step)) return invalidStep(step, opts);
     return fill(start, end, 1, step);
@@ -244,6 +249,6 @@ const fill = (start, end, step, options = {}) => {
   }
 
   return fillLetters(start, end, Math.max(Math.abs(step), 1), opts);
-};
+}};
 
 module.exports = fill;
